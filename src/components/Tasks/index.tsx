@@ -1,27 +1,22 @@
 import { View, Text, Image, FlatList } from "react-native";
 import { styles } from "./styles";
 import Task from "../Task";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function Tasks() {
-  const [tasks, setTasks] = useState<string[]>([
-    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
-    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
-    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
-    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
-    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
-    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
-    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
-    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
-    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
-    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
-    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
-    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
-    "@Integer urna interdum massa libero auctor neque turpis turpis semper @.",
-  ]);
+type TasksProps = {
+  newTask: string;
+};
 
+export default function Tasks({ newTask }: TasksProps) {
+  const [tasks, setTasks] = useState<string[]>([]);
   const criadasCount = tasks.length;
   const concluidasCount = 0;
+
+  useEffect(() => {
+    if (newTask) {
+      setTasks([...tasks, newTask]);
+    }
+  }, [newTask]);
 
   return (
     <View style={styles.tasks}>
