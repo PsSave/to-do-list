@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   },
 
   textConcluded: {
-    color: "#4EA8DE",
+    color: "#8284FA",
     fontSize: 15,
     fontFamily: "Inter_700Bold",
   },

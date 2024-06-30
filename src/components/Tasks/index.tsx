@@ -4,9 +4,23 @@ import Task from "../Task";
 import { useState } from "react";
 
 export default function Tasks() {
-  const [tasks, setTasks] = useState<string[]>([]);
+  const [tasks, setTasks] = useState<string[]>([
+    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
+    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
+    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
+    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
+    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
+    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
+    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
+    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
+    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
+    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
+    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
+    "Integer urna interdum massa libero auctor neque turpis turpis semper.",
+    "@Integer urna interdum massa libero auctor neque turpis turpis semper @.",
+  ]);
 
-  const criadasCount = 0;
+  const criadasCount = tasks.length;
   const concluidasCount = 0;
 
   return (
@@ -25,8 +39,10 @@ export default function Tasks() {
 
       <FlatList
         data={tasks}
-        keyExtractor={(item) => item}
-        renderItem={({ item }) => <Task />}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item, index }) => (
+          <Task key={index} id={index + 1} text={item} />
+        )}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={() => {
           return (
