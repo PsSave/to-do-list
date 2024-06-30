@@ -5,14 +5,28 @@ const colors = {
 };
 
 export const styles = StyleSheet.create({
-  background: {
-    height: 173,
-    width: "100%",
-    backgroundColor: colors.background,
-    padding: 24,
+  task: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     gap: 8,
+    backgroundColor: "#262626",
+    padding: 12,
+    marginBottom: 8,
+    borderWidth: 1,
+    borderColor: "#333333",
+    borderRadius: 8,
+  },
+
+  firstTask: {
+    marginTop: 15,
+  },
+
+  textTask: {
+    flex: 1,
+    color: "#F2F2F2",
+    textAlign: "left",
+    fontSize: 14,
+    fontFamily: "Inter_400Regular",
   },
 });

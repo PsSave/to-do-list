@@ -1,10 +1,24 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 
-export default function Task() {
+type TaskProps = {
+  id: number;
+  text: string;
+};
+
+export default function Task({ id, text }: TaskProps) {
   return (
-    <View>
-      <Text>etsaeasasdasdasdasd</Text>
+    <View style={[styles.task, id === 1 && styles.firstTask]}>
+      <TouchableOpacity>
+        <Image
+          source={require("../../assets/Checked=false, Hover=false.png")}
+        />
+      </TouchableOpacity>
+
+      <Text style={styles.textTask}>{text}</Text>
+      <TouchableOpacity>
+        <Image source={require("../../assets/Delete.png")} />
+      </TouchableOpacity>
     </View>
   );
 }
