@@ -8,9 +8,7 @@ import Tasks from "../../components/Tasks";
 
 export default function Home() {
   const [fontsLoaded] = useFonts({ Inter_400Regular, Inter_700Bold });
-  const [newTask, setNewTask] = useState("");
-  const [newTaskFocused, setNewTaskFocused] = useState(false);
-  const [isPressed, setIsPressed] = useState(false);
+  const [newTask, setNewTask] = useState<string>("");
 
   if (!fontsLoaded) {
     return null;
@@ -19,9 +17,9 @@ export default function Home() {
   return (
     <>
       <View style={styles.container}>
-        <Header />
+        <Header setNewTask={setNewTask} />
         <View style={styles.tasksContainer}>
-          <Tasks />
+          <Tasks newTask={newTask} />
         </View>
       </View>
     </>
