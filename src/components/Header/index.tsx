@@ -2,10 +2,19 @@ import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { useState } from "react";
 
-export default function Header() {
-  const [newTask, setNewTask] = useState("");
+type HeaderProps = {
+  setNewTask: (text: string) => void;
+};
+
+export default function Header({ setNewTask }: HeaderProps) {
   const [newTaskFocused, setNewTaskFocused] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
+  const [text, setText] = useState("");
+
+  const handleNewTask = () => {
+    setNewTask(text);
+    setText("");
+  };
 
   return (
     <View style={styles.background}>
@@ -15,7 +24,8 @@ export default function Header() {
           style={[styles.inputText, newTaskFocused && styles.inputTextFocused]}
           placeholder={"Adicione uma nova tarefa"}
           placeholderTextColor={"#808080"}
-          onChange={() => setNewTask}
+          value={text}
+          onChangeText={setText}
           onFocus={() => setNewTaskFocused(true)}
           onBlur={() => setNewTaskFocused(false)}
         />
@@ -24,7 +34,7 @@ export default function Header() {
           onPressIn={() => setIsPressed(true)}
           onPressOut={() => setIsPressed(false)}
           activeOpacity={0.8}
-          onPress={() => console.log("Button pressed")}
+          onPress={handleNewTask}
         >
           <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
