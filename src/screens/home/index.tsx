@@ -19,7 +19,7 @@ export default function Home() {
       <View style={styles.container}>
         <Header setNewTask={setNewTask} />
         <View style={styles.tasksContainer}>
-          <Tasks newTask={newTask} />
+          <Tasks newTask={newTask} setNewTask={setNewTask} />
         </View>
       </View>
     </>

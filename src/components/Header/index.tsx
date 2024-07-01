@@ -1,6 +1,6 @@
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type HeaderProps = {
   setNewTask: (text: string) => void;
@@ -10,10 +10,13 @@ export default function Header({ setNewTask }: HeaderProps) {
   const [newTaskFocused, setNewTaskFocused] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
   const [text, setText] = useState("");
+  const inputRef = useRef<TextInput>(null);
 
   const handleNewTask = () => {
     setNewTask(text);
     setText("");
+    setNewTaskFocused(false);
+    inputRef.current?.blur();
   };
 
   return (
@@ -28,6 +31,7 @@ export default function Header({ setNewTask }: HeaderProps) {
           onChangeText={setText}
           onFocus={() => setNewTaskFocused(true)}
           onBlur={() => setNewTaskFocused(false)}
+          ref={inputRef}
         />
         <TouchableOpacity
           style={[styles.button, isPressed && styles.buttonHover]}
@@ -36,7 +40,10 @@ export default function Header({ setNewTask }: HeaderProps) {
           activeOpacity={0.8}
           onPress={handleNewTask}
         >
-          <Text style={styles.buttonText}>+</Text>
+          <Image
+            style={styles.plus}
+            source={require("../../assets/plus.png")}
+          />
         </TouchableOpacity>
       </View>
     </View>

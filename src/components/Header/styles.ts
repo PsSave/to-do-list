@@ -57,8 +57,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#4EA8DE",
   },
 
-  buttonText: {
-    color: "#F2F2F2",
-    fontSize: 24,
+  plus: {
+    objectFit: "contain",
   },
 });
