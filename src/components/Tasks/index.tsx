@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 
 type TasksProps = {
   newTask: string;
+  setNewTask: (task: string) => void;
 };
 
-export default function Tasks({ newTask }: TasksProps) {
+export default function Tasks({ newTask, setNewTask }: TasksProps) {
   const [tasks, setTasks] = useState<string[]>([]);
   const criadasCount = tasks.length;
   const concluidasCount = 0;
@@ -15,8 +16,14 @@ export default function Tasks({ newTask }: TasksProps) {
   useEffect(() => {
     if (newTask) {
       setTasks([...tasks, newTask]);
+      setNewTask("");
     }
   }, [newTask]);
+
+  const handleRemoveTask = (id: number) => {
+    const newTasks = tasks.filter((task, index) => index !== id - 1);
+    setTasks(newTasks);
+  };
 
   return (
     <View style={styles.tasks}>
@@ -36,7 +43,12 @@ export default function Tasks({ newTask }: TasksProps) {
         data={tasks}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
-          <Task key={index} id={index + 1} text={item} />
+          <Task
+            key={index}
+            id={index + 1}
+            text={item}
+            handleRemoveTask={handleRemoveTask}
+          />
         )}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={() => {
