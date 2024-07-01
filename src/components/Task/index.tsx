@@ -5,21 +5,36 @@ import { useState } from "react";
 type TaskProps = {
   id: number;
   text: string;
+  isChecked: boolean;
+
   handleRemoveTask: (id: number) => void;
+  handleCheckTask: (id: number) => void;
 };
 
-export default function Task({ id, text, handleRemoveTask }: TaskProps) {
+export default function Task({
+  id,
+  text,
+  isChecked,
+  handleRemoveTask,
+  handleCheckTask,
+}: TaskProps) {
   const [isPressed, setIsPressed] = useState(false);
 
   return (
-    <View style={[styles.task, id === 1 && styles.firstTask]}>
-      <TouchableOpacity>
+    <View style={[styles.task]}>
+      <TouchableOpacity activeOpacity={0.5} onPress={() => handleCheckTask(id)}>
         <Image
-          source={require("../../assets/Checked=false, Hover=false.png")}
+          source={
+            !isChecked
+              ? require("../../assets/Checked=false, Hover=false.png")
+              : require("../../assets/Checked=true, Hover=false.png")
+          }
         />
       </TouchableOpacity>
 
-      <Text style={styles.textTask}>{text}</Text>
+      <Text style={[styles.textTask, isChecked && styles.textChecked]}>
+        {text}
+      </Text>
       <TouchableOpacity
         style={[styles.button, isPressed && styles.buttonHover]}
         onPress={() => handleRemoveTask(id)}

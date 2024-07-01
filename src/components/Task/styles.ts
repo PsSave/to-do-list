@@ -18,16 +18,17 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
   },
 
-  firstTask: {
-    marginTop: 15,
-  },
-
   textTask: {
     flex: 1,
     color: "#F2F2F2",
     textAlign: "left",
     fontSize: 14,
     fontFamily: "Inter_400Regular",
+  },
+
+  textChecked: {
+    textDecorationLine: "line-through",
+    color: "#808080",
   },
 
   button: {
