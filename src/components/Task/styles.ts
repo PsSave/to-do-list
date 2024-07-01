@@ -29,4 +29,16 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: "Inter_400Regular",
   },
+
+  button: {
+    width: 32,
+    height: 32,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4,
+  },
+
+  buttonHover: {
+    backgroundColor: "#333333",
+  },
 });
