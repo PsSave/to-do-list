@@ -9,20 +9,30 @@ type TasksProps = {
 };
 
 export default function Tasks({ newTask, setNewTask }: TasksProps) {
-  const [tasks, setTasks] = useState<string[]>([]);
+  const [tasks, setTasks] = useState<
+    { id: number; text: string; isChecked: boolean }[]
+  >([]);
   const criadasCount = tasks.length;
-  const concluidasCount = 0;
+  const concluidasCount = tasks.filter((task) => task.isChecked).length;
 
   useEffect(() => {
     if (newTask) {
-      setTasks([...tasks, newTask]);
+      setTasks([...tasks, { id: Date.now(), text: newTask, isChecked: false }]);
       setNewTask("");
     }
   }, [newTask]);
 
   const handleRemoveTask = (id: number) => {
-    const newTasks = tasks.filter((task, index) => index !== id - 1);
+    const newTasks = tasks.filter((task) => task.id !== id);
     setTasks(newTasks);
+  };
+
+  const handleCheckTask = (id: number) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, isChecked: !task.isChecked } : task
+      )
+    );
   };
 
   return (
@@ -41,13 +51,15 @@ export default function Tasks({ newTask, setNewTask }: TasksProps) {
 
       <FlatList
         data={tasks}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item, index }) => (
           <Task
             key={index}
-            id={index + 1}
-            text={item}
+            id={item.id}
+            text={item.text}
+            isChecked={item.isChecked}
             handleRemoveTask={handleRemoveTask}
+            handleCheckTask={handleCheckTask}
           />
         )}
         showsVerticalScrollIndicator={false}

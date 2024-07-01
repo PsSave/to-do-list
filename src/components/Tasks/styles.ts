@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "#333333",
     paddingBottom: 20,
+    marginBottom: 15,
   },
 
   infoBlock: {
